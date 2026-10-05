@@ -15,7 +15,7 @@ import { getPokemon } from "@/services/pokeAPI";
 const DetailsPage = () => {
   const { id: idParam } = useParams();
   const id = Number(idParam);
-  const isValidId = Number.isInteger(id) && id >= 1 && id <= 151;
+  const isValidId = Number.isInteger(id) && id >= 1 && id <= 150;
 
   if (!isValidId) return <Navigate to="/" replace />;
   return <PokemonDetailsContent id={id} />;

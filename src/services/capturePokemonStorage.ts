@@ -2,18 +2,18 @@ import type { CapturedPokemon } from "@/@types/pokemon";
 
 const STORAGE_KEY = "pokedex.captured.v1";
 
-function isCapturedPokemon(value: unknown): value is CapturedPokemon {
+const isCapturedPokemon = (value: unknown): value is CapturedPokemon => {
   if (!value || typeof value !== "object") return false;
   const item = value as Record<string, unknown>;
   return (
     Number.isInteger(item.pokemonId) &&
     Number(item.pokemonId) >= 1 &&
-    Number(item.pokemonId) <= 151 &&
+    Number(item.pokemonId) <= 150 &&
     typeof item.nickname === "string" &&
     typeof item.date === "string" &&
     /^\d{4}-\d{2}-\d{2}$/.test(item.date)
   );
-}
+};
 
 export const capturedPokemonStorage = {
   read(): CapturedPokemon[] {

@@ -10,7 +10,7 @@ const CapturedPage = () => {
   const { captured } = useCapturedPokemon();
   const pokemonQuery = useQuery({
     queryKey: ["pokemon", "generation-one"],
-    queryFn: ({ signal }) => getPokemonList(151, 0, signal),
+    queryFn: ({ signal }) => getPokemonList(150, 0, signal),
     staleTime: 30 * 60 * 1000,
     enabled: captured.length > 0,
   });
