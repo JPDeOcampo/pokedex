@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { BallIcon } from "@/components/ui/Icons";
+import { useCapturedPokemon } from "@/context/CapturedPokemonContext";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
@@ -13,6 +14,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   ].join(" ");
 
 const Header = () => {
+  const { captured } = useCapturedPokemon();
   const { theme, toggleTheme } = useTheme();
   const isLight = theme === "light";
 
@@ -61,7 +63,7 @@ const Header = () => {
               aria-label="0 Pokémon captured"
               className="grid min-w-5 place-items-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-bold leading-none text-white"
             >
-              0
+              {captured.length}
             </span>
           </NavLink>
 

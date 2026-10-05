@@ -3,8 +3,10 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { CapturedPokemonProvider } from "@/context/CapturedPokemonContext";
 
 const PokedexPage = lazy(() => import("@/pages/PokedexPage"));
+const DetailsPage = lazy(() => import("@/pages/DetailsPage"));
 const CapturedPage = lazy(() => import("./pages/CapturedPage"));
 
 const queryClient = new QueryClient({
@@ -20,17 +22,20 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <BrowserRouter>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route index element={<PokedexPage />} />
-                <Route path="captured" element={<CapturedPage />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
+        <CapturedPokemonProvider>
+          <BrowserRouter>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
+                <Route element={<Layout />}>
+                  <Route index element={<PokedexPage />} />
+                  <Route path="pokemon/:id" element={<DetailsPage />} />
+                  <Route path="captured" element={<CapturedPage />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Route>
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </CapturedPokemonProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
