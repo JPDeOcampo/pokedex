@@ -5,12 +5,13 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useCapturedPokemon } from "@/context/CapturedPokemonContext";
 import { formatDate, formatName, formatPokemonNumber } from "../lib/utils";
 import { getPokemonList } from "@/services/pokeAPI";
+import { GEN_ONE_COUNT } from "@/hooks/usePokedexPokemon";
 
 const CapturedPage = () => {
   const { captured } = useCapturedPokemon();
   const pokemonQuery = useQuery({
     queryKey: ["pokemon", "generation-one"],
-    queryFn: ({ signal }) => getPokemonList(150, 0, signal),
+    queryFn: ({ signal }) => getPokemonList(GEN_ONE_COUNT, 0, signal),
     staleTime: 30 * 60 * 1000,
     enabled: captured.length > 0,
   });
@@ -44,7 +45,7 @@ const CapturedPage = () => {
           <div className="flex items-center gap-3 rounded-2xl bg-emerald-100 px-4 py-3 text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-300">
             <Check className="size-5" />
             <span className="text-sm font-bold">
-              {captured.length} of 150 captured
+              {captured.length} of {GEN_ONE_COUNT} captured
             </span>
           </div>
         )}

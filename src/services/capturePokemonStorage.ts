@@ -1,4 +1,5 @@
 import type { CapturedPokemon } from "@/@types/pokemon";
+import { GEN_ONE_COUNT } from "@/hooks/usePokedexPokemon";
 
 const STORAGE_KEY = "pokedex.captured.v1";
 
@@ -8,7 +9,7 @@ const isCapturedPokemon = (value: unknown): value is CapturedPokemon => {
   return (
     Number.isInteger(item.pokemonId) &&
     Number(item.pokemonId) >= 1 &&
-    Number(item.pokemonId) <= 150 &&
+    Number(item.pokemonId) <= GEN_ONE_COUNT &&
     typeof item.nickname === "string" &&
     typeof item.date === "string" &&
     /^\d{4}-\d{2}-\d{2}$/.test(item.date)

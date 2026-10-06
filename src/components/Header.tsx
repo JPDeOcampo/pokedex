@@ -32,7 +32,7 @@ const Header = () => {
           </span>
 
           <span className="font-display text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Poke<span className="text-red-600">dex</span>
+            Poké<span className="text-red-600">dex</span>
           </span>
         </NavLink>
 

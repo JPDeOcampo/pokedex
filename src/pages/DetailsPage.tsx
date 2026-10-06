@@ -11,11 +11,12 @@ import {
   today,
 } from "../lib/utils";
 import { getPokemon } from "@/services/pokeAPI";
+import { GEN_ONE_COUNT } from "@/hooks/usePokedexPokemon";
 
 const DetailsPage = () => {
   const { id: idParam } = useParams();
   const id = Number(idParam);
-  const isValidId = Number.isInteger(id) && id >= 1 && id <= 150;
+  const isValidId = Number.isInteger(id) && id >= 1 && id <= GEN_ONE_COUNT;
 
   if (!isValidId) return <Navigate to="/" replace />;
   return <PokemonDetailsContent id={id} />;
